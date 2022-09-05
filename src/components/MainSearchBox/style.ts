@@ -3,67 +3,88 @@ import { colors, alignments } from '../../style';
 
 export const MainSearchBoxWrap = styled.div`
   ${alignments.center}
-  justify-content: space-evenly;
   flex-direction: column;
-  width: 90%;
-  height: 70%;
+  width: 500px;
+  height: auto;
   margin: auto;
-  color: white;
+  border: 1px solid black;
 `;
 
 export const MainPokemonLogoWrap = styled.div`
   ${alignments.center};
-  width: 60%;
-  height: 33%;
+  width: 100%;
+  height: 100%;
 
-  img {
+  span {
     width: 100%;
-    height: 100%;
+    height: 200px;
+    background-image: url('/assets/imgs/pokemon-logo-bw.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &:hover span {
+    background-image: url('/assets/imgs/pokemon-logo-color.svg');
+    background-size: 85%;
   }
 `;
 
-export const MainSearchInputWrap = styled.div`
-  ${alignments.center}
-  width: 60%;
-  height: 33%;
+export const MainSearchBoxInputWrap = styled.div`
+  margin: 25px 0;
 
   input {
-    width: 400px;
-    height: 60px;
-    padding: 0 15px;
-    border: none;
+    width: 300px;
+    height: 50px;
+    padding-left: 20px;
+    border: 1px solid ${colors.black};
     border-radius: 20px;
-    font-size: 25px;
-    font-family: inherit;
+    outline: none;
+    transition: all 0.2s linear;
+    font-size: 18px;
+  }
 
-    &:focus {
-      outline: none;
-    }
+  input:focus {
+    border: none;
+    box-shadow: 0 0 4px ${colors.black};
+    outline: 2px solid ${colors.yellow};
   }
 `;
 
-export const MainSearchBtnWrap = styled.div`
-  ${alignments.center}
-  width: 60%;
-  height: 33%;
+export const MainSearchBoxBtnWrap = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 280px;
+  margin: 25px 0 50px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 25px;
+  background-color: ${colors.lightBlue};
+  font-size: 20px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.15s linear;
 
-  button {
-    width: 250px;
-    height: 60px;
-    border: none;
-    border-radius: 20px;
-    background-color: ${colors.lightBlue};
+  span {
+    width: 40px;
+    height: 40px;
+    background-image: url('/assets/imgs/pokeball.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &:hover {
+    background-color: ${colors.darkYellow};
     color: ${colors.white};
-    font-size: 25px;
     cursor: pointer;
-    font-weight: 600;
-    font-family: inherit;
   }
 `;
 
 export const AppStyle = {
   display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   width: '100%',
-  height: '100%',
-  backgroundColor: `${colors.black}`,
+  height: '100vh',
 };
