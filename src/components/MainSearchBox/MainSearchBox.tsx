@@ -8,12 +8,10 @@ const MainSearchBox = () => {
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonData, setPokemonData] = useState(null);
   const [isData, setIsData] = useState(false);
-  const [isCorrectName, setIsCorrectName] = useState(false);
+  const [isCorrectName, setIsCorrectName] = useState(true);
 
-  const getData = (name: string) => {
-    if (!name) return;
-
-    const getUrl = `https://pokeapi.co/api/v2/pokemon/${name}/`;
+  const fetchPokemonData = () => {
+    const getUrl = `https://pokeapi.co/api/v2/pokemon/pikachu/`;
 
     axios
       .get(getUrl)
@@ -29,34 +27,63 @@ const MainSearchBox = () => {
   };
 
   useEffect(() => {
-    getData('pikachu');
+    // if (!pokemonName) return;
+    fetchPokemonData();
   }, [isData]);
 
-  const onGetData = () => {
+  const handleChangePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value;
+    setPokemonName(val);
+  };
+
+  const handleClickSetIsData = () => {
     setIsData(!isData);
-    if (!pokemonName) {
-      setIsCorrectName(false);
-    }
+  };
+
+  const handleKeyPressSetIsData = (e: React.KeyboardEvent<HTMLElement>) => {
+    const key = e.key;
+    console.log(e);
+    if (key !== 'Enter') return;
+    setIsData(!isData);
   };
 
   return (
     <>
-      <C.MainSearchBoxWrap>
+      {/* <C.MainSearchBoxWrap>
         <C.MainPokemonLogoWrap>
           <span></span>
         </C.MainPokemonLogoWrap>
+
+        <C.MainSearchBoxIconWrap>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </C.MainSearchBoxIconWrap>
+
         <C.MainSearchBoxInputWrap>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={handleChangePokemonName}
+            onKeyDown={handleKeyPressSetIsData}
+          />
         </C.MainSearchBoxInputWrap>
-        <C.MainSearchBoxBtnWrap>
+
+        <C.MainSearchBoxBtnWrap onClick={handleClickSetIsData}>
           <span></span>
           SEARCH!
           <span></span>
         </C.MainSearchBoxBtnWrap>
 
-        {!isCorrectName && <span>{messages.noPokemonName}</span>}
-      </C.MainSearchBoxWrap>
+        {!isCorrectName && (
+          <span style={C.AlertMsgStyle}>{messages.noPokemonName}</span>
+        )}
+      </C.MainSearchBoxWrap> */}
+
       {/* {pokemonData && <PokemonInfo pokemonData={pokemonData} />} */}
+      <PokemonInfo pokemonData={pokemonData} />
     </>
   );
 };
