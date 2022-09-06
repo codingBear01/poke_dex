@@ -83,7 +83,7 @@ const MainSearchBox = () => {
       </C.MainSearchBoxWrap> */}
 
       {/* {pokemonData && <PokemonInfo pokemonData={pokemonData} />} */}
-      <PokemonInfo pokemonData={pokemonData} />
+      <PokemonInfo pokemonData={pokemonData} pokemonName={'pikachu'} />
     </>
   );
 };
