@@ -79,7 +79,7 @@ export const MainSearchBoxInputWrap = styled.div`
     width: 300px;
     height: 50px;
     padding-left: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     outline: none;
     background-color: ${colors.black};
     font-size: 18px;
@@ -104,7 +104,7 @@ export const MainSearchBoxBtnWrap = styled.button`
   margin: 15px 0;
   padding: 8px 0;
   border: 3px solid ${colors.black};
-  border-radius: 20px;
+  border-radius: 10px;
   background: none;
   font-size: 20px;
   font-weight: 600;
@@ -121,8 +121,14 @@ export const MainSearchBoxBtnWrap = styled.button`
 
   &:hover {
     border: 3px solid ${colors.darkYellow};
-    color: ${colors.darkYellow};
+    box-shadow: 0 0 7px ${colors.black};
+    background-color: ${colors.black};
+    color: ${colors.white};
     cursor: pointer;
+
+    span {
+      background-image: url('/assets/imgs/pokeball-negative.png');
+    }
   }
 `;
 

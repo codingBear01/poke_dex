@@ -1,5 +1,3 @@
-import { NewLineKind } from 'typescript';
-
 export interface PokemonDataProps {
   pokemonName: string | null;
   pokemonData: null | {

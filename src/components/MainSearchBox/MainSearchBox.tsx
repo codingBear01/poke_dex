@@ -11,7 +11,7 @@ const MainSearchBox = () => {
   const [isCorrectName, setIsCorrectName] = useState(true);
 
   const fetchPokemonData = () => {
-    const getUrl = `https://pokeapi.co/api/v2/pokemon/pikachu/`;
+    const getUrl = `https://pokeapi.co/api/v2/pokemon/cloyster/`;
 
     axios
       .get(getUrl)
@@ -83,7 +83,7 @@ const MainSearchBox = () => {
       </C.MainSearchBoxWrap> */}
 
       {/* {pokemonData && <PokemonInfo pokemonData={pokemonData} />} */}
-      <PokemonInfo pokemonData={pokemonData} pokemonName={'pikachu'} />
+      <PokemonInfo pokemonData={pokemonData} pokemonName={'cloyster'} />
     </>
   );
 };
