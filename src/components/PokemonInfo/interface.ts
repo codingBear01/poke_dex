@@ -2,12 +2,14 @@ export interface PokemonDataProps {
   pokemonName: string | null;
   pokemonData: null | {
     abilities: [
-      ability: {
-        name: string;
-        url: string;
-      },
-      is_hidden: boolean,
-      slot: number
+      {
+        ability: {
+          name: string;
+          url: string;
+        };
+        is_hidden: boolean;
+        slot: number;
+      }
     ];
     base_experience: number;
     forms: [

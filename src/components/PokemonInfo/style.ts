@@ -4,7 +4,8 @@ import { colors, alignments } from '../../style';
 export const PokemonInfoLeftWrap = styled.div`
   ${alignments.center}
   flex-direction: column;
-  border: 1px solid black;
+  padding: 30px;
+  border-radius: 5px;
 `;
 
 export const PokemonNameWrap = styled.div`
@@ -14,37 +15,73 @@ export const PokemonNameWrap = styled.div`
   box-shadow: 0 2px 3px ${colors.black};
   font-size: 24px;
   font-weight: 600;
+`;
 
-  span {
-    width: 20px;
-    height: 20px;
-    margin: 0 10px;
-    background-image: url('/assets/imgs/pokeball-pixel.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: inherit;
-  }
+export const PokeballImg = styled.span`
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  background-image: url('/assets/imgs/pokeball-pixel.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: inherit;
 `;
 
 export const PokemonSpriteWrap = styled.div`
-  margin-top: 30px;
+  margin: 30px 0;
+  padding: 30px;
+  box-shadow: 0 2px 3px ${colors.black};
+  border-radius: 5px;
 
   img {
-    border-radius: 5px;
-    box-shadow: 0 2px 3px ${colors.black};
+    width: 130px;
+    height: 130px;
   }
 `;
 
-export const PokemonTypeWrap = styled.div`
-  ${alignments.center};
-  flex-direction: column;
+export const PokemonInfoRaw = styled.div`
+  ${alignments.spaceEvenly};
+  width: 550px;
+`;
 
-  span {
-    width: 57px;
-    height: 25px;
-    margin-top: 5px;
-    background-size: contain;
-    background-repeat: no-repeat;
+export const PokemonInfoWrap = styled.div`
+  ${alignments.center};
+  border-radius: 10px;
+  box-shadow: 0 2px 3px ${colors.black};
+  background-color: ${colors.black};
+`;
+
+export const PokemonInfoTitle = styled.span`
+  padding: 0 10px;
+  border-radius: 10px 0 0 10px;
+  background-color: ${colors.grey};
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+`;
+
+export const PokemonInfoContent = styled.div`
+  ${alignments.center};
+  background-color: ${colors.black};
+`;
+
+export const PokemonTypeImgBox = styled.span`
+  width: 57px;
+  height: 25px;
+  margin: 0 10px;
+  border-radius: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+`;
+
+export const PokemonAbilBox = styled.span`
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${colors.white};
+
+  &:last-child {
+    border-radius: 0 10px 10px 0;
   }
 `;
 

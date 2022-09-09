@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PokemonDataProps, SpeciesDataProps } from './interface';
 import * as S from './style';
-import * as pos from './pokemonInfoPosition';
+import { colors } from '../../style';
+import * as icon from './pokemonInfoIcons';
 
 const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const [speciesData, setSpeciesData] = useState<SpeciesDataProps>({
@@ -60,8 +61,9 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const name = pokemonName;
   const moves = pokemonData?.moves;
   const sprites = pokemonData?.sprites;
-  const officialSprites =
-    pokemonData?.sprites.other['official-artwork'].front_default;
+  const animatedFrontSprite =
+    pokemonData?.sprites.versions['generation-v']['black-white'].animated
+      .front_default;
   const stats = pokemonData?.stats;
   const types = pokemonData?.types;
   const weight = pokemonData?.weight;
@@ -78,7 +80,7 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
 
   const backgroundImgs = types?.map((type) => {
     const typeName = type.type.name;
-    return pos.TYPES.filter((el, i) => el.name === typeName)[0];
+    return icon.TYPES.filter((el, i) => el.name === typeName)[0];
   });
 
   // btn 클릭 시 parameter 전달하는 식으로 수정
@@ -113,33 +115,63 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   useEffect(() => {
     fetchPokemonSpeciesData();
   }, []);
-
+  console.log(abilities);
   return (
     <>
-      <S.PokemonInfoLeftWrap>
+      <S.PokemonInfoLeftWrap
+        style={{
+          boxShadow: `0 0px 5px ${color}`,
+        }}
+      >
         <S.PokemonNameWrap>
-          <span></span>
+          <S.PokeballImg></S.PokeballImg>
           No. {indexNumber} {name}
-          <span></span>
+          <S.PokeballImg></S.PokeballImg>
         </S.PokemonNameWrap>
 
         <S.PokemonSpriteWrap>
-          <img src={officialSprites} alt="cloyster" />
+          <img src={animatedFrontSprite} alt="cloyster" />
         </S.PokemonSpriteWrap>
 
-        <S.PokemonTypeWrap>
-          {types &&
-            types.map((type, i) => (
-              <span
-                key={type.slot}
-                style={{
-                  backgroundImage: backgroundImgs
-                    ? backgroundImgs[i].imgUrl
-                    : '',
-                }}
-              ></span>
-            ))}
-        </S.PokemonTypeWrap>
+        <S.PokemonInfoRaw>
+          <S.PokemonInfoWrap>
+            <S.PokemonInfoTitle>TYPE</S.PokemonInfoTitle>
+
+            <S.PokemonInfoContent>
+              {types &&
+                types.map((type, i) => (
+                  <S.PokemonTypeImgBox
+                    key={type.slot}
+                    style={{
+                      backgroundImage: backgroundImgs
+                        ? backgroundImgs[i].imgUrl
+                        : '',
+                    }}
+                  ></S.PokemonTypeImgBox>
+                ))}
+            </S.PokemonInfoContent>
+          </S.PokemonInfoWrap>
+
+          <S.PokemonInfoWrap>
+            <S.PokemonInfoTitle>ABILITIES</S.PokemonInfoTitle>
+
+            <S.PokemonInfoContent>
+              {abilities &&
+                abilities.map((ability, i) => (
+                  <S.PokemonAbilBox
+                    key={ability.slot}
+                    style={{
+                      borderRight:
+                        i === abilities.length - 1 ? '' : '1px solid',
+                      color: ability.is_hidden ? `${color}` : '',
+                    }}
+                  >
+                    {i + 1}. {ability.ability.name}
+                  </S.PokemonAbilBox>
+                ))}
+            </S.PokemonInfoContent>
+          </S.PokemonInfoWrap>
+        </S.PokemonInfoRaw>
       </S.PokemonInfoLeftWrap>
       <S.PokemonInfoRightDiv>right</S.PokemonInfoRightDiv>
     </>
