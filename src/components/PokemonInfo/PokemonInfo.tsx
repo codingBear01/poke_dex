@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PokemonDataProps, SpeciesDataProps } from './interface';
 import * as S from './style';
+import * as pos from './pokemonInfoPosition';
 
 const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const [speciesData, setSpeciesData] = useState<SpeciesDataProps>({
@@ -75,6 +76,11 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const growthRate = speciesData?.growth_rate;
   const hatchCounter = speciesData?.hatch_counter;
 
+  const backgroundImgs = types?.map((type) => {
+    const typeName = type.type.name;
+    return pos.TYPES.filter((el, i) => el.name === typeName)[0];
+  });
+
   // btn 클릭 시 parameter 전달하는 식으로 수정
   // method: machine, level-up, tutor,
   // const moves = pokemonData?.moves.map((move) => {
@@ -110,17 +116,31 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
 
   return (
     <>
-      <S.PokemonInfoLeftDiv>
-        <S.NameWrap>
+      <S.PokemonInfoLeftWrap>
+        <S.PokemonNameWrap>
           <span></span>
           No. {indexNumber} {name}
           <span></span>
-        </S.NameWrap>
+        </S.PokemonNameWrap>
 
-        <S.PokemonInfoImgDiv>
+        <S.PokemonSpriteWrap>
           <img src={officialSprites} alt="cloyster" />
-        </S.PokemonInfoImgDiv>
-      </S.PokemonInfoLeftDiv>
+        </S.PokemonSpriteWrap>
+
+        <S.PokemonTypeWrap>
+          {types &&
+            types.map((type, i) => (
+              <span
+                key={type.slot}
+                style={{
+                  backgroundImage: backgroundImgs
+                    ? backgroundImgs[i].imgUrl
+                    : '',
+                }}
+              ></span>
+            ))}
+        </S.PokemonTypeWrap>
+      </S.PokemonInfoLeftWrap>
       <S.PokemonInfoRightDiv>right</S.PokemonInfoRightDiv>
     </>
   );
