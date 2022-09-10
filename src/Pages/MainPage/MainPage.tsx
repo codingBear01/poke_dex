@@ -11,7 +11,6 @@ const MainPage = ({
   pokemonName,
 }: MainPageProps) => {
   const [isCorrectName, setIsCorrectName] = useState(true);
-  const [isPokemonData, setIsPokemonData] = useState(false);
   const navigate = useNavigate();
 
   const fetchPokemonData = () => {
@@ -31,24 +30,9 @@ const MainPage = ({
       });
   };
 
-  useEffect(() => {
-    if (!pokemonName) return;
-    fetchPokemonData();
-  }, [isPokemonData]);
-
   const onChangePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.currentTarget.value.toLowerCase();
     setPokemonName(val);
-  };
-
-  const onClickSetIsPokemonData = () => {
-    setIsPokemonData(!isPokemonData);
-  };
-
-  const onKeyPressSetIsData = (e: React.KeyboardEvent<HTMLElement>) => {
-    const key = e.key;
-    if (key !== 'Enter') return;
-    setIsPokemonData(!isPokemonData);
   };
 
   return (
@@ -71,11 +55,14 @@ const MainPage = ({
           <input
             type="text"
             onChange={onChangePokemonName}
-            onKeyDown={onKeyPressSetIsData}
+            onKeyDown={(e) => {
+              if (e.key !== 'Enter') return;
+              fetchPokemonData();
+            }}
           />
         </C.MainSearchBoxInputWrap>
 
-        <C.MainSearchBoxBtnWrap onClick={onClickSetIsPokemonData}>
+        <C.MainSearchBoxBtnWrap onClick={fetchPokemonData}>
           <span></span>
           SEARCH!
           <span></span>
