@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { colors, alignments } from '../../style';
 
+/* components */
 export const PokemonInfoLeftWrap = styled.div`
   ${alignments.center}
   flex-direction: column;
   padding: 30px;
+  width: 700px;
   border-radius: 5px;
 `;
 
@@ -12,7 +14,6 @@ export const PokemonNameWrap = styled.div`
   ${alignments.center};
   padding: 5px 0;
   border-radius: 5px;
-  box-shadow: 0 2px 3px ${colors.black};
   font-size: 24px;
   font-weight: 600;
 `;
@@ -28,10 +29,9 @@ export const PokeballImg = styled.span`
 `;
 
 export const PokemonSpriteWrap = styled.div`
-  margin: 30px 0;
+  margin-top: 30px;
   padding: 30px;
-  box-shadow: 0 2px 3px ${colors.black};
-  border-radius: 5px;
+  border-radius: 100%;
 
   img {
     width: 130px;
@@ -41,50 +41,53 @@ export const PokemonSpriteWrap = styled.div`
 
 export const PokemonInfoRaw = styled.div`
   ${alignments.spaceEvenly};
-  width: 550px;
+  width: 100%;
+  margin-top: 30px;
 `;
 
 export const PokemonInfoWrap = styled.div`
   ${alignments.center};
   border-radius: 10px;
   box-shadow: 0 2px 3px ${colors.black};
-  background-color: ${colors.black};
+  background-color: ${colors.grey};
 `;
 
 export const PokemonInfoTitle = styled.span`
   padding: 0 10px;
   border-radius: 10px 0 0 10px;
-  background-color: ${colors.grey};
+  background-color: ${colors.black};
   font-size: 16px;
   font-weight: 700;
+  color: ${colors.white};
   line-height: 40px;
 `;
 
 export const PokemonInfoContent = styled.div`
   ${alignments.center};
-  background-color: ${colors.black};
+  font-size: 16px;
+  font-weight: 600;
 `;
 
 export const PokemonTypeImgBox = styled.span`
   width: 57px;
   height: 25px;
-  margin: 0 10px;
+  margin: 0 5px 0 10px;
   border-radius: 5px;
   background-size: contain;
   background-repeat: no-repeat;
-`;
-
-export const PokemonAbilBox = styled.span`
-  padding: 0 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: ${colors.white};
 
   &:last-child {
-    border-radius: 0 10px 10px 0;
+    margin: 0 10px 0 5px;
   }
 `;
 
-export const PokemonTypeImgWrap = styled.div``;
+export const PokemonAbilSpan = styled.span`
+  padding: 0 10px;
+
+  &:last-child {
+    border-radius: 0 10px 10px 0;
+    text-shadow: 0 0 2px ${colors.black};
+  }
+`;
 
 export const PokemonInfoRightDiv = styled.div``;

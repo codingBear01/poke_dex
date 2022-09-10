@@ -18,6 +18,34 @@ export const TYPES = [
   { name: 'steel', imgUrl: "url('/assets/imgs/type-icon-steel.png')" },
   { name: 'water', imgUrl: "url('/assets/imgs/type-icon-water.png')" },
 ];
+
+export const TOTAL_EXPERIENCES = [
+  {
+    name: 'slow-then-very-fast',
+    experience: 600000,
+  },
+  {
+    name: 'fast',
+    experience: 800000,
+  },
+  {
+    name: 'medium',
+    experience: 1000000,
+  },
+  {
+    name: 'medium-slow',
+    experience: 1059860,
+  },
+  {
+    name: 'slow',
+    experience: 1250000,
+  },
+  {
+    name: 'fast-then-very-slow',
+    experience: 1640000,
+  },
+];
+
 export const DAMEGE_CATEGORY = [
   { name: 'physical', pos: '-127px -347px' },
   { name: 'special', pos: '-253px -347px' },

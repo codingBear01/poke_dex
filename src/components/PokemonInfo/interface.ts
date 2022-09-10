@@ -11,13 +11,6 @@ export interface PokemonDataProps {
         slot: number;
       }
     ];
-    base_experience: number;
-    forms: [
-      {
-        name: string;
-        url: string;
-      }
-    ];
     height: number;
     held_items: [
       {
