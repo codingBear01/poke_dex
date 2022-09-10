@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PokemonDataProps, SpeciesDataProps } from './interface';
+import { PokemonDataProps, SpeciesDataProps } from '../../store/interfaces';
 import * as S from './style';
 import { colors } from '../../style';
 import * as data from './pokemonInfoData';
 
-const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
+const PokemonInfoPage = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const [speciesData, setSpeciesData] = useState<SpeciesDataProps>({
     base_happiness: null,
     capture_rate: null,
@@ -77,16 +77,16 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   const maleRate = genderRate ? (8 - genderRate) * 12.5 : 0;
   const femaleRate = genderRate ? genderRate * 12.5 : 0;
   const genera = speciesData?.genera;
-  const totalExperience = data.TOTAL_EXPERIENCES.filter(
-    (exp) => exp.name === speciesData.growth_rate.name
-  )[0].experience;
+  const totalExperience = speciesData.growth_rate.name
+    ? data.TOTAL_EXPERIENCES.filter(
+        (exp) => exp.name === speciesData.growth_rate.name
+      )[0].experience
+    : 0;
   const hatchCounter = speciesData?.hatch_counter;
   const backgroundImgs = types?.map((type) => {
     const typeName = type.type.name;
     return data.TYPES.filter((el, i) => el.name === typeName)[0];
   });
-
-  console.log(evolutionChain);
 
   // btn 클릭 시 parameter 전달하는 식으로 수정
   // method: machine, level-up, tutor,
@@ -121,17 +121,21 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
     fetchPokemonSpeciesData();
   }, []);
 
+  const boxShadowStyle = {
+    boxShadow: `0 0 5px 1px ${color}`,
+  };
+
   return (
     <>
-      <S.PokemonInfoLeftWrap style={{ boxShadow: `0 0 5px 1px ${color}` }}>
-        <S.PokemonNameWrap style={{ boxShadow: `0 0 5px 1px ${color}` }}>
+      <S.PokemonInfoLeftWrap style={boxShadowStyle}>
+        <S.PokemonNameWrap style={boxShadowStyle}>
           <S.PokeballImg></S.PokeballImg>
           No. {indexNumber} {name}
           <S.PokeballImg></S.PokeballImg>
         </S.PokemonNameWrap>
 
-        <S.PokemonSpriteWrap style={{ boxShadow: `0 0 5px 1px ${color}` }}>
-          <img src={animatedFrontSprite} alt="cloyster" />
+        <S.PokemonSpriteWrap style={boxShadowStyle}>
+          <img src={animatedFrontSprite} alt={name} />
         </S.PokemonSpriteWrap>
 
         {/* types & abilities */}
@@ -195,7 +199,7 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
                 lineHeight: '50px',
               }}
             >
-              GENDER RATE
+              GENDER RATES
             </S.PokemonInfoTitle>
             <S.PokemonInfoContent
               style={{
@@ -245,4 +249,4 @@ const PokemonInfo = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   );
 };
 
-export default PokemonInfo;
+export default PokemonInfoPage;

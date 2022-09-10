@@ -133,14 +133,6 @@ export const MainSearchBoxBtnWrap = styled.button`
 `;
 
 /* styles */
-export const AppStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: '100vh',
-};
-
 export const AlertMsgStyle = {
   color: `${colors.red}`,
   fontWeight: '600',

@@ -91,3 +91,5 @@ export const PokemonAbilSpan = styled.span`
 `;
 
 export const PokemonInfoRightDiv = styled.div``;
+
+/* styles */

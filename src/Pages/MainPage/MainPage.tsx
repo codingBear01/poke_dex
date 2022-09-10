@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as C from './style';
 import { messages } from '../../messages';
-import { PokemonInfo } from '../PokemonInfo';
+import { MainPageProps } from '../../store/interfaces';
 
-const MainSearchBox = () => {
-  const [pokemonName, setPokemonName] = useState('');
-  const [pokemonData, setPokemonData] = useState(null);
-  const [isData, setIsData] = useState(false);
+const MainPage = ({
+  setPokemonData,
+  setPokemonName,
+  pokemonName,
+}: MainPageProps) => {
   const [isCorrectName, setIsCorrectName] = useState(true);
+  const [isPokemonData, setIsPokemonData] = useState(false);
+  const navigate = useNavigate();
 
   const fetchPokemonData = () => {
-    const getUrl = `https://pokeapi.co/api/v2/pokemon/magnemite/`;
+    const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
 
     axios
       .get(getUrl)
@@ -19,6 +23,7 @@ const MainSearchBox = () => {
         console.log('get poke res', res);
         setPokemonData(res.data);
         setIsCorrectName(true);
+        navigate('/pokemon-info');
       })
       .catch((err) => {
         console.log('get poke err', err);
@@ -27,29 +32,28 @@ const MainSearchBox = () => {
   };
 
   useEffect(() => {
-    // if (!pokemonName) return;
+    if (!pokemonName) return;
     fetchPokemonData();
-  }, [isData]);
+  }, [isPokemonData]);
 
-  const handleChangePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.currentTarget.value;
+  const onChangePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value.toLowerCase();
     setPokemonName(val);
   };
 
-  const handleClickSetIsData = () => {
-    setIsData(!isData);
+  const onClickSetIsPokemonData = () => {
+    setIsPokemonData(!isPokemonData);
   };
 
-  const handleKeyPressSetIsData = (e: React.KeyboardEvent<HTMLElement>) => {
+  const onKeyPressSetIsData = (e: React.KeyboardEvent<HTMLElement>) => {
     const key = e.key;
-    console.log(e);
     if (key !== 'Enter') return;
-    setIsData(!isData);
+    setIsPokemonData(!isPokemonData);
   };
 
   return (
     <>
-      {/* <C.MainSearchBoxWrap>
+      <C.MainSearchBoxWrap>
         <C.MainPokemonLogoWrap>
           <span></span>
         </C.MainPokemonLogoWrap>
@@ -66,12 +70,12 @@ const MainSearchBox = () => {
         <C.MainSearchBoxInputWrap>
           <input
             type="text"
-            onChange={handleChangePokemonName}
-            onKeyDown={handleKeyPressSetIsData}
+            onChange={onChangePokemonName}
+            onKeyDown={onKeyPressSetIsData}
           />
         </C.MainSearchBoxInputWrap>
 
-        <C.MainSearchBoxBtnWrap onClick={handleClickSetIsData}>
+        <C.MainSearchBoxBtnWrap onClick={onClickSetIsPokemonData}>
           <span></span>
           SEARCH!
           <span></span>
@@ -80,12 +84,9 @@ const MainSearchBox = () => {
         {!isCorrectName && (
           <span style={C.AlertMsgStyle}>{messages.noPokemonName}</span>
         )}
-      </C.MainSearchBoxWrap> */}
-
-      {/* {pokemonData && <PokemonInfo pokemonData={pokemonData} />} */}
-      <PokemonInfo pokemonData={pokemonData} pokemonName={'charizard'} />
+      </C.MainSearchBoxWrap>
     </>
   );
 };
 
-export default MainSearchBox;
+export default MainPage;
