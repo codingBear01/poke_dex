@@ -1,4 +1,9 @@
 export interface MainPageProps {
+  setPokemonName: React.Dispatch<React.SetStateAction<string | null>>;
+  pokemonName: string | null;
+}
+
+export interface PokemonDataProps {
   setPokemonData: React.Dispatch<
     React.SetStateAction<{
       abilities: [
@@ -240,12 +245,6 @@ export interface MainPageProps {
       weight: number;
     } | null>
   >;
-  setPokemonName: React.Dispatch<React.SetStateAction<string | null>>;
-  pokemonName: string | null;
-}
-
-export interface PokemonDataProps {
-  pokemonName: string | null;
   pokemonData: {
     abilities: [
       {

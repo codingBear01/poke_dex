@@ -5,7 +5,7 @@ import * as S from './style';
 import { colors } from '../../style';
 import * as data from './pokemonInfoData';
 
-const PokemonInfoPage = ({ pokemonData, pokemonName }: PokemonDataProps) => {
+const PokemonInfoPage = ({ setPokemonData, pokemonData }: PokemonDataProps) => {
   const [speciesData, setSpeciesData] = useState<SpeciesDataProps>({
     base_happiness: null,
     capture_rate: null,
@@ -50,6 +50,7 @@ const PokemonInfoPage = ({ pokemonData, pokemonName }: PokemonDataProps) => {
     },
     hatch_counter: null,
   });
+  const pokemonName = localStorage.getItem('pokemonName');
 
   const abilities = pokemonData?.abilities;
   const height = pokemonData ? pokemonData?.height / 10 : 0;
@@ -101,6 +102,20 @@ const PokemonInfoPage = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   //   }
   // });
 
+  const fetchPokemonData = () => {
+    const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
+
+    axios
+      .get(getUrl)
+      .then((res) => {
+        console.log('get poke res', res);
+        setPokemonData(res.data);
+      })
+      .catch((err) => {
+        console.log('get poke err', err);
+      });
+  };
+
   const fetchPokemonSpeciesData = () => {
     if (!pokemonName) return;
 
@@ -118,6 +133,7 @@ const PokemonInfoPage = ({ pokemonData, pokemonName }: PokemonDataProps) => {
   };
 
   useEffect(() => {
+    fetchPokemonData();
     fetchPokemonSpeciesData();
   }, []);
 

@@ -1,72 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as C from './style';
 import { messages } from '../../messages';
-import { MainPageProps } from '../../store/interfaces';
 
-const MainPage = ({
-  setPokemonData,
-  setPokemonName,
-  pokemonName,
-}: MainPageProps) => {
+const MainPage = () => {
   const [isCorrectName, setIsCorrectName] = useState(true);
+  const [pokemonName, setPokemonName] = useState('');
+  const [pokemonNames, setPokemonNames] = useState([]);
+  const allPokemonNames: string[] = pokemonNames.map((el) => el['name']);
   const navigate = useNavigate();
 
-  const fetchPokemonData = () => {
-    const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
+  const fetchAllPokemonData = () => {
+    const getUrl =
+      'https://pokeapi.co/api/v2/pokemon-species/?offset=0&limit=905';
 
     axios
       .get(getUrl)
       .then((res) => {
-        console.log('get poke res', res);
-        setPokemonData(res.data);
-        setIsCorrectName(true);
-        navigate('/pokemon-info');
+        console.log('get all pokemon name', res.data.results);
+        setPokemonNames(res.data.results);
       })
       .catch((err) => {
-        console.log('get poke err', err);
-        setIsCorrectName(false);
+        const error = new Error(err);
+        console.log('err all pokemon name', error);
       });
   };
+
+  useEffect(() => {
+    fetchAllPokemonData();
+  }, []);
 
   const onChangePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.currentTarget.value.toLowerCase();
     setPokemonName(val);
   };
 
+  const pokemonNameChecker = () => {
+    if (allPokemonNames.includes(pokemonName)) {
+      setIsCorrectName(true);
+      localStorage.setItem('pokemonName', pokemonName);
+      navigate('pokemon-info');
+    } else {
+      setIsCorrectName(false);
+      console.log('false');
+    }
+  };
+
+  const onClickCheckPokemonName = () => {
+    pokemonNameChecker();
+  };
+
+  const onKeyDownCheckPokemonName = (e: React.KeyboardEvent<HTMLElement>) => {
+    const key = e.key;
+    if (key !== 'Enter') return;
+    pokemonNameChecker();
+  };
+
   return (
     <>
       <C.MainSearchBoxWrap>
         <C.MainPokemonLogoWrap>
-          <span></span>
+          <C.MainPokemonLogo></C.MainPokemonLogo>
         </C.MainPokemonLogoWrap>
 
         <C.MainSearchBoxIconWrap>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
+          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
         </C.MainSearchBoxIconWrap>
 
         <C.MainSearchBoxInputWrap>
-          <input
+          <C.MainSearchBoxInput
             type="text"
             onChange={onChangePokemonName}
-            onKeyDown={(e) => {
-              if (e.key !== 'Enter') return;
-              fetchPokemonData();
-            }}
+            onKeyDown={onKeyDownCheckPokemonName}
           />
         </C.MainSearchBoxInputWrap>
 
-        <C.MainSearchBoxBtnWrap onClick={fetchPokemonData}>
-          <span></span>
+        <C.MainSearchBoxBtn onClick={onClickCheckPokemonName}>
+          <C.MainSearchBoxPokeballImg></C.MainSearchBoxPokeballImg>
           SEARCH!
-          <span></span>
-        </C.MainSearchBoxBtnWrap>
+          <C.MainSearchBoxPokeballImg></C.MainSearchBoxPokeballImg>
+        </C.MainSearchBoxBtn>
 
         {!isCorrectName && (
           <span style={C.AlertMsgStyle}>{messages.noPokemonName}</span>
