@@ -4,3 +4,5 @@ import { colors, alignments } from '../../style';
 export const NavBarUl = styled.ul`
   ${alignments.center}
 `;
+
+export const NavBarBtn = styled.button``;

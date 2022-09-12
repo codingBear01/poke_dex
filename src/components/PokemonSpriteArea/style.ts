@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { colors, alignments } from '../../style';
 
 export const SpriteAreaWrap = styled.div`
-  ${alignments.center}
+  ${alignments.flexStart}
   flex-direction: column;
   width: 800px;
+  height: 800px;
 `;
 
 export const SpriteAreaTitleWrap = styled.div`

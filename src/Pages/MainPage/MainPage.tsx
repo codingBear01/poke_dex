@@ -43,7 +43,6 @@ const MainPage = () => {
       navigate('pokemon-info');
     } else {
       setIsCorrectName(false);
-      console.log('false');
     }
   };
 

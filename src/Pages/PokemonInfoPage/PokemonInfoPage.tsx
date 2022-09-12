@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PokemonPageProps } from '../../store/interfaces';
-import * as S from './style';
-import { colors } from '../../style';
+import { PokemonPageProps } from '../../store';
 import * as data from './pokemonInfoData';
+import { colors, leftSideStyle } from '../../style';
 import { NavBar, PokemonSpriteArea } from '../../components';
 
 const PokemonInfoPage = ({
@@ -59,13 +58,12 @@ const PokemonInfoPage = ({
         setPokemonData(res.data);
       })
       .catch((err) => {
-        console.log('get poke err', err);
+        const error = new Error(err);
+        console.log('get poke err', error);
       });
   };
 
   const fetchPokemonSpeciesData = () => {
-    if (!pokemonName) return;
-
     const getUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`;
 
     axios
@@ -75,25 +73,21 @@ const PokemonInfoPage = ({
         setSpeciesData(res.data);
       })
       .catch((err) => {
-        console.log('get poke spe err', err);
+        const error = new Error(err);
+        console.log('get poke spe err', error);
       });
   };
 
   useEffect(() => {
+    if (!pokemonName) return;
+
     fetchPokemonData();
     fetchPokemonSpeciesData();
   }, []);
 
   return (
     <>
-      <div
-        style={{
-          display: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          msFlexDirection: 'column',
-        }}
-      >
+      <div style={leftSideStyle}>
         <NavBar />
         <div>infos</div>
       </div>

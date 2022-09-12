@@ -8,27 +8,28 @@ const NavBar = () => {
     const pageName = e.currentTarget.dataset['value'];
     navigate(`/pokemon-${pageName}`);
   };
+
   return (
     <nav>
       <C.NavBarUl>
         <li>
-          <button data-value="info" onClick={handleTransferPage}>
+          <C.NavBarBtn data-value="info" onClick={handleTransferPage}>
             Info
-          </button>
+          </C.NavBarBtn>
         </li>
         <li>
-          <button data-value="moves" onClick={handleTransferPage}>
+          <C.NavBarBtn data-value="moves" onClick={handleTransferPage}>
             Moves
-          </button>
+          </C.NavBarBtn>
         </li>
         <li>
-          <button>Locations</button>
+          <C.NavBarBtn>Locations</C.NavBarBtn>
         </li>
         <li>
-          <button>Weakness</button>
+          <C.NavBarBtn>Weakness</C.NavBarBtn>
         </li>
         <li>
-          <button>Evolutionary Chain</button>
+          <C.NavBarBtn>Evolutionary Chain</C.NavBarBtn>
         </li>
       </C.NavBarUl>
     </nav>

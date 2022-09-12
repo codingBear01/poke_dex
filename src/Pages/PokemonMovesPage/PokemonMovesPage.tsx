@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { PokemonPageProps } from '../../store';
 import { NavBar, PokemonSpriteArea } from '../../components';
-import { PokemonPageProps } from '../../store/interfaces';
+import { leftSideStyle } from '../../style';
 
 const PokemonMovesPage = ({
   setPokemonData,
@@ -18,18 +20,46 @@ const PokemonMovesPage = ({
   const indexNumber = pokemonData?.id;
   const color = speciesData?.color.name;
 
-  console.log(pokemonData);
+  const fetchPokemonData = () => {
+    const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
+
+    axios
+      .get(getUrl)
+      .then((res) => {
+        console.log('get poke res', res);
+        setPokemonData(res.data);
+      })
+      .catch((err) => {
+        const error = new Error(err);
+        console.log('get poke err', error);
+      });
+  };
+
+  const fetchPokemonSpeciesData = () => {
+    const getUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`;
+
+    axios
+      .get(getUrl)
+      .then((res) => {
+        console.log('get poke spe res', res);
+        setSpeciesData(res.data);
+      })
+      .catch((err) => {
+        const error = new Error(err);
+        console.log('get poke spe err', error);
+      });
+  };
+
+  useEffect(() => {
+    if (!pokemonName) return;
+
+    fetchPokemonData();
+    fetchPokemonSpeciesData();
+  }, []);
 
   return (
     <>
-      <div
-        style={{
-          display: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          msFlexDirection: 'column',
-        }}
-      >
+      <div style={leftSideStyle}>
         <NavBar />
         <div>moves</div>
       </div>

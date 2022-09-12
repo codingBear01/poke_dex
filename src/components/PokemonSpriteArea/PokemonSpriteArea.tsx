@@ -1,7 +1,6 @@
 import React from 'react';
 import * as C from './style';
-import { PokemonSpriteAreaProps } from '../../store/interfaces';
-import { alignments } from '../../style';
+import { PokemonSpriteAreaProps } from '../../store';
 
 const PokemonSpriteArea = ({
   name,
