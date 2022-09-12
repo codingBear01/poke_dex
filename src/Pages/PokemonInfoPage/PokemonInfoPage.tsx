@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PokemonInfoPageProps } from '../../store/interfaces';
+import { PokemonPageProps } from '../../store/interfaces';
 import * as S from './style';
 import { colors } from '../../style';
 import * as data from './pokemonInfoData';
-import { PokemonSpriteArea } from '../../components';
+import { NavBar, PokemonSpriteArea } from '../../components';
 
 const PokemonInfoPage = ({
   setPokemonData,
   pokemonData,
   setSpeciesData,
   speciesData,
-}: PokemonInfoPageProps) => {
+}: PokemonPageProps) => {
   const pokemonName = localStorage.getItem('pokemonName');
 
   const abilities = pokemonData?.abilities;
@@ -23,7 +23,6 @@ const PokemonInfoPage = ({
     ? pokemonName.split('')[0].toUpperCase() +
       pokemonName.split('').slice(1).join('')
     : '';
-  const moves = pokemonData?.moves;
   const officialSprite =
     pokemonData?.sprites.other['official-artwork'].front_default;
   const stats = pokemonData?.stats;
@@ -49,19 +48,6 @@ const PokemonInfoPage = ({
     const typeName = type.type.name;
     return data.TYPES.filter((el, i) => el.name === typeName)[0];
   });
-
-  // btn 클릭 시 parameter 전달하는 식으로 수정
-  // method: machine, level-up, tutor,
-  // const moves = pokemonData?.moves.map((move) => {
-  //   if (
-  //     move.version_group_details.filter((versionGroupDetail) => {
-  //       const method = versionGroupDetail.move_learn_method.name;
-  //       return method === 'level-up';
-  //     })[0] !== undefined
-  //   ) {
-  //     return move.move.name;
-  //   }
-  // });
 
   const fetchPokemonData = () => {
     const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
@@ -100,7 +86,17 @@ const PokemonInfoPage = ({
 
   return (
     <>
-      <div>infos</div>
+      <div
+        style={{
+          display: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+          msFlexDirection: 'column',
+        }}
+      >
+        <NavBar />
+        <div>infos</div>
+      </div>
       <PokemonSpriteArea
         name={name}
         officialSprite={officialSprite}

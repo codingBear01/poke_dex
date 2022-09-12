@@ -1,4 +1,4 @@
-export interface PokemonInfoPageProps {
+export interface PokemonPageProps {
   setPokemonData: React.Dispatch<
     React.SetStateAction<{
       abilities: [

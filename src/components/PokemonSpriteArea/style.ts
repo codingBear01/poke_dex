@@ -9,9 +9,10 @@ export const SpriteAreaWrap = styled.div`
 
 export const SpriteAreaTitleWrap = styled.div`
   box-sizing: border-box;
-  ${alignments.flexStart}
+  ${alignments.center}
   width: 100%;
-  padding: 10px 10px 10px 230px;
+  padding: 10px;
+  margin-bottom: 50px;
   background-color: ${colors.black};
   transform: skew(-20deg);
 `;
