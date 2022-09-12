@@ -1,55 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PokemonDataProps, SpeciesDataProps } from '../../store/interfaces';
+import { PokemonInfoPageProps } from '../../store/interfaces';
 import * as S from './style';
 import { colors } from '../../style';
 import * as data from './pokemonInfoData';
+import { PokemonSpriteArea } from '../../components';
 
-const PokemonInfoPage = ({ setPokemonData, pokemonData }: PokemonDataProps) => {
-  const [speciesData, setSpeciesData] = useState<SpeciesDataProps>({
-    base_happiness: null,
-    capture_rate: null,
-    color: {
-      name: null,
-      url: null,
-    },
-    egg_groups: [
-      {
-        name: null,
-        url: null,
-      },
-    ],
-    evolution_chain: {
-      url: null,
-    },
-    flavor_text_entries: null || [
-      {
-        flavor_text: null,
-        language: {
-          name: null,
-          url: null,
-        },
-        version: {
-          name: null,
-          url: null,
-        },
-      },
-    ],
-    gender_rate: null,
-    genera: null || [
-      {
-        genus: null,
-        language: {
-          name: null,
-          url: null,
-        },
-      },
-    ],
-    growth_rate: {
-      name: null,
-    },
-    hatch_counter: null,
-  });
+const PokemonInfoPage = ({
+  setPokemonData,
+  pokemonData,
+  setSpeciesData,
+  speciesData,
+}: PokemonInfoPageProps) => {
   const pokemonName = localStorage.getItem('pokemonName');
 
   const abilities = pokemonData?.abilities;
@@ -62,9 +24,8 @@ const PokemonInfoPage = ({ setPokemonData, pokemonData }: PokemonDataProps) => {
       pokemonName.split('').slice(1).join('')
     : '';
   const moves = pokemonData?.moves;
-  const animatedFrontSprite =
-    pokemonData?.sprites.versions['generation-v']['black-white'].animated
-      .front_default;
+  const officialSprite =
+    pokemonData?.sprites.other['official-artwork'].front_default;
   const stats = pokemonData?.stats;
   const types = pokemonData?.types;
   const weight = pokemonData ? pokemonData.weight / 10 : 0;
@@ -78,7 +39,7 @@ const PokemonInfoPage = ({ setPokemonData, pokemonData }: PokemonDataProps) => {
   const maleRate = genderRate ? (8 - genderRate) * 12.5 : 0;
   const femaleRate = genderRate ? genderRate * 12.5 : 0;
   const genera = speciesData?.genera;
-  const totalExperience = speciesData.growth_rate.name
+  const totalExperience = speciesData?.growth_rate.name
     ? data.TOTAL_EXPERIENCES.filter(
         (exp) => exp.name === speciesData.growth_rate.name
       )[0].experience
@@ -137,130 +98,15 @@ const PokemonInfoPage = ({ setPokemonData, pokemonData }: PokemonDataProps) => {
     fetchPokemonSpeciesData();
   }, []);
 
-  const boxShadowStyle = {
-    boxShadow: `0 0 5px 1px ${color}`,
-  };
-
   return (
     <>
-      <S.PokemonInfoLeftWrap style={boxShadowStyle}>
-        <S.PokemonNameWrap style={boxShadowStyle}>
-          <S.PokeballImg></S.PokeballImg>
-          No. {indexNumber} {name}
-          <S.PokeballImg></S.PokeballImg>
-        </S.PokemonNameWrap>
-
-        <S.PokemonSpriteWrap style={boxShadowStyle}>
-          <img src={animatedFrontSprite} alt={name} />
-        </S.PokemonSpriteWrap>
-
-        {/* types & abilities */}
-        <S.PokemonInfoRaw>
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>TYPE</S.PokemonInfoTitle>
-            <S.PokemonInfoContent>
-              {types &&
-                types.map((type, i) => (
-                  <S.PokemonTypeImgBox
-                    key={type.slot}
-                    style={{
-                      backgroundImage: backgroundImgs
-                        ? backgroundImgs[i].imgUrl
-                        : '',
-                    }}
-                  ></S.PokemonTypeImgBox>
-                ))}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>ABILITIES</S.PokemonInfoTitle>
-
-            <S.PokemonInfoContent>
-              {abilities &&
-                abilities.map((ability, i) => (
-                  <S.PokemonAbilSpan
-                    key={ability.slot}
-                    style={{
-                      borderRight:
-                        i === abilities.length - 1 ? '' : '1px solid',
-                      color: ability.is_hidden ? `${color}` : '',
-                    }}
-                  >
-                    {i + 1}. {ability.ability.name}
-                  </S.PokemonAbilSpan>
-                ))}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-        </S.PokemonInfoRaw>
-
-        <S.PokemonInfoRaw>
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>HEIGHT</S.PokemonInfoTitle>
-            <S.PokemonInfoContent style={{ width: '80px' }}>
-              {height}m
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>WEIGHT</S.PokemonInfoTitle>
-            <S.PokemonInfoContent style={{ width: '80px' }}>
-              {weight}kg
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle
-              style={{
-                lineHeight: '50px',
-              }}
-            >
-              GENDER RATES
-            </S.PokemonInfoTitle>
-            <S.PokemonInfoContent
-              style={{
-                alignItems: 'flex-start',
-                flexDirection: 'column',
-                paddingLeft: '10px',
-                width: '120px',
-              }}
-            >
-              {genderRate === -1 && <span>GENDERLESS</span>}
-              {genderRate !== -1 && (
-                <>
-                  <span>MALE: {maleRate}%</span>
-                  <span>FEMALE: {femaleRate}%</span>
-                </>
-              )}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-        </S.PokemonInfoRaw>
-
-        <S.PokemonInfoRaw>
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>TOTAL EXPERIENCE</S.PokemonInfoTitle>
-            <S.PokemonInfoContent style={{ width: '80px' }}>
-              {totalExperience.toLocaleString()}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>CAPTURE RATE</S.PokemonInfoTitle>
-            <S.PokemonInfoContent style={{ width: '80px' }}>
-              {captureRate}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-
-          <S.PokemonInfoWrap>
-            <S.PokemonInfoTitle>BASE HAPPINESS</S.PokemonInfoTitle>
-            <S.PokemonInfoContent style={{ width: '80px' }}>
-              {baseHappiness}
-            </S.PokemonInfoContent>
-          </S.PokemonInfoWrap>
-        </S.PokemonInfoRaw>
-      </S.PokemonInfoLeftWrap>
-
-      <S.PokemonInfoRightDiv></S.PokemonInfoRightDiv>
+      <div>infos</div>
+      <PokemonSpriteArea
+        name={name}
+        officialSprite={officialSprite}
+        indexNumber={indexNumber}
+        color={color}
+      />
     </>
   );
 };

@@ -1,9 +1,4 @@
-export interface MainPageProps {
-  setPokemonName: React.Dispatch<React.SetStateAction<string | null>>;
-  pokemonName: string | null;
-}
-
-export interface PokemonDataProps {
+export interface PokemonInfoPageProps {
   setPokemonData: React.Dispatch<
     React.SetStateAction<{
       abilities: [
@@ -484,53 +479,109 @@ export interface PokemonDataProps {
     ];
     weight: number;
   } | null;
+  setSpeciesData: React.Dispatch<
+    React.SetStateAction<{
+      base_happiness: number | null;
+      capture_rate: number | null;
+      color: {
+        name: string | null | undefined;
+        url: string | null | undefined;
+      };
+      egg_groups: [
+        {
+          name: string | null;
+          url: string | null;
+        }
+      ];
+      evolution_chain: {
+        url: string | null;
+      };
+      flavor_text_entries:
+        | null
+        | [
+            {
+              flavor_text: string | null;
+              language: {
+                name: string | null;
+                url: string | null;
+              };
+              version: {
+                name: string | null;
+                url: string | null;
+              };
+            }
+          ];
+      gender_rate: number | null;
+      genera:
+        | null
+        | [
+            {
+              genus: string | null;
+              language: {
+                name: string | null;
+                url: string | null;
+              };
+            }
+          ];
+      growth_rate: {
+        name: string | null;
+      };
+      hatch_counter: number | null;
+    } | null>
+  >;
+  speciesData: {
+    base_happiness: number | null;
+    capture_rate: number | null;
+    color: {
+      name: string | null | undefined;
+      url: string | null | undefined;
+    };
+    egg_groups: [
+      {
+        name: string | null;
+        url: string | null;
+      }
+    ];
+    evolution_chain: {
+      url: string | null;
+    };
+    flavor_text_entries:
+      | null
+      | [
+          {
+            flavor_text: string | null;
+            language: {
+              name: string | null;
+              url: string | null;
+            };
+            version: {
+              name: string | null;
+              url: string | null;
+            };
+          }
+        ];
+    gender_rate: number | null;
+    genera:
+      | null
+      | [
+          {
+            genus: string | null;
+            language: {
+              name: string | null;
+              url: string | null;
+            };
+          }
+        ];
+    growth_rate: {
+      name: string | null;
+    };
+    hatch_counter: number | null;
+  } | null;
 }
 
-export interface SpeciesDataProps {
-  base_happiness: number | null;
-  capture_rate: number | null;
-  color: {
-    name: string | null;
-    url: string | null;
-  };
-  egg_groups: [
-    {
-      name: string | null;
-      url: string | null;
-    }
-  ];
-  evolution_chain: {
-    url: string | null;
-  };
-  flavor_text_entries:
-    | null
-    | [
-        {
-          flavor_text: string | null;
-          language: {
-            name: string | null;
-            url: string | null;
-          };
-          version: {
-            name: string | null;
-            url: string | null;
-          };
-        }
-      ];
-  gender_rate: number | null;
-  genera:
-    | null
-    | [
-        {
-          genus: string | null;
-          language: {
-            name: string | null;
-            url: string | null;
-          };
-        }
-      ];
-  growth_rate: {
-    name: string | null;
-  };
-  hatch_counter: number | null;
+export interface PokemonSpriteAreaProps {
+  name: string | undefined;
+  officialSprite: string | undefined;
+  indexNumber: number | undefined;
+  color: string | null | undefined;
 }

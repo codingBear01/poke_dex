@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { MainPage, PokemonInfoPage } from './Pages';
-import { PokemonDataProps } from './store/interfaces';
+import { PokemonInfoPageProps } from './store/interfaces';
 
 function App() {
   const [pokemonData, setPokemonData] =
-    useState<PokemonDataProps['pokemonData']>(null);
+    useState<PokemonInfoPageProps['pokemonData']>(null);
+  const [speciesData, setSpeciesData] =
+    useState<PokemonInfoPageProps['speciesData']>(null);
 
   return (
     <Routes>
@@ -16,6 +18,8 @@ function App() {
           <PokemonInfoPage
             setPokemonData={setPokemonData}
             pokemonData={pokemonData}
+            setSpeciesData={setSpeciesData}
+            speciesData={speciesData}
           />
         }
       />
