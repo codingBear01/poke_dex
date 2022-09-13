@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from './style';
+import * as S from './style';
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
@@ -11,27 +11,33 @@ const NavBar = () => {
 
   return (
     <nav>
-      <C.NavBarUl>
+      <S.NavBarUl>
         <li>
-          <C.NavBarBtn data-value="info" onClick={handleTransferPage}>
+          <S.NavBarBtn data-value="info" onClick={handleTransferPage}>
             Info
-          </C.NavBarBtn>
+          </S.NavBarBtn>
         </li>
         <li>
-          <C.NavBarBtn data-value="moves" onClick={handleTransferPage}>
+          <S.NavBarBtn data-value="moves" onClick={handleTransferPage}>
             Moves
-          </C.NavBarBtn>
+          </S.NavBarBtn>
         </li>
         <li>
-          <C.NavBarBtn>Locations</C.NavBarBtn>
+          <S.NavBarBtn>Locations</S.NavBarBtn>
         </li>
         <li>
-          <C.NavBarBtn>Weakness</C.NavBarBtn>
+          <S.NavBarBtn>Weakness</S.NavBarBtn>
         </li>
         <li>
-          <C.NavBarBtn>Evolutionary Chain</C.NavBarBtn>
+          <S.NavBarBtn
+            style={{
+              width: '200px',
+            }}
+          >
+            Evolutionary Chain
+          </S.NavBarBtn>
         </li>
-      </C.NavBarUl>
+      </S.NavBarUl>
     </nav>
   );
 };

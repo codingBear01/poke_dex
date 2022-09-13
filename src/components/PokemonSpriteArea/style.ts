@@ -5,14 +5,16 @@ export const SpriteAreaWrap = styled.div`
   ${alignments.flexStart}
   flex-direction: column;
   width: 800px;
-  height: 800px;
+  height: 100vh;
 `;
 
 export const SpriteAreaTitleWrap = styled.div`
   box-sizing: border-box;
   ${alignments.center}
   width: 100%;
+  height: 50px;
   padding: 10px;
+  margin-top: 15px;
   margin-bottom: 50px;
   background-color: ${colors.black};
   transform: skew(-20deg);

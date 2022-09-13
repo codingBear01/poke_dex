@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PokemonPageProps } from '../../store';
 import * as data from './pokemonInfoData';
+import * as S from './style';
 import { colors, leftSideStyle } from '../../style';
 import { NavBar, PokemonSpriteArea } from '../../components';
 
@@ -43,7 +44,7 @@ const PokemonInfoPage = ({
       )[0].experience
     : 0;
   const hatchCounter = speciesData?.hatch_counter;
-  const backgroundImgs = types?.map((type) => {
+  const typeImgs = types?.map((type) => {
     const typeName = type.type.name;
     return data.TYPES.filter((el, i) => el.name === typeName)[0];
   });
@@ -89,7 +90,23 @@ const PokemonInfoPage = ({
     <>
       <div style={leftSideStyle}>
         <NavBar />
-        <div>infos</div>
+        <S.PokemonInfoWrap>
+          <div>Type</div>
+          <div>Height</div>
+          <div>Weight</div>
+          <div>Held Items</div>
+          <div>Base Happiness</div>
+          <div>Capture Rate</div>
+          <div>Egg Groups</div>
+          <div>Hatch Counter</div>
+          <div>Gender Rate</div>
+          <div>Genera</div>
+          <div>Flavor Text</div>
+          <div>Held Items</div>
+
+          <div>Abilities</div>
+          <div>Stats</div>
+        </S.PokemonInfoWrap>
       </div>
       <PokemonSpriteArea
         name={name}

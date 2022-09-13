@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as C from './style';
+import * as S from './style';
 import { messages } from '../../messages';
 
 const MainPage = () => {
@@ -58,38 +58,38 @@ const MainPage = () => {
 
   return (
     <>
-      <C.MainSearchBoxWrap>
-        <C.MainPokemonLogoWrap>
-          <C.MainPokemonLogo></C.MainPokemonLogo>
-        </C.MainPokemonLogoWrap>
+      <S.MainSearchBoxWrap>
+        <S.MainPokemonLogoWrap>
+          <S.MainPokemonLogo></S.MainPokemonLogo>
+        </S.MainPokemonLogoWrap>
 
-        <C.MainSearchBoxIconWrap>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-          <C.MainSearchBoxIcon></C.MainSearchBoxIcon>
-        </C.MainSearchBoxIconWrap>
+        <S.MainSearchBoxIconWrap>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+          <S.MainSearchBoxIcon></S.MainSearchBoxIcon>
+        </S.MainSearchBoxIconWrap>
 
-        <C.MainSearchBoxInputWrap>
-          <C.MainSearchBoxInput
+        <S.MainSearchBoxInputWrap>
+          <S.MainSearchBoxInput
             type="text"
             onChange={onChangePokemonName}
             onKeyDown={onKeyDownCheckPokemonName}
           />
-        </C.MainSearchBoxInputWrap>
+        </S.MainSearchBoxInputWrap>
 
-        <C.MainSearchBoxBtn onClick={onClickCheckPokemonName}>
-          <C.MainSearchBoxPokeballImg></C.MainSearchBoxPokeballImg>
+        <S.MainSearchBoxBtn onClick={onClickCheckPokemonName}>
+          <S.MainSearchBoxPokeballImg></S.MainSearchBoxPokeballImg>
           SEARCH!
-          <C.MainSearchBoxPokeballImg></C.MainSearchBoxPokeballImg>
-        </C.MainSearchBoxBtn>
+          <S.MainSearchBoxPokeballImg></S.MainSearchBoxPokeballImg>
+        </S.MainSearchBoxBtn>
 
         {!isCorrectName && (
-          <span style={C.AlertMsgStyle}>{messages.noPokemonName}</span>
+          <span style={S.AlertMsgStyle}>{messages.noPokemonName}</span>
         )}
-      </C.MainSearchBoxWrap>
+      </S.MainSearchBoxWrap>
     </>
   );
 };

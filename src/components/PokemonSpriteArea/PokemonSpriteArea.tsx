@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from './style';
+import * as S from './style';
 import { PokemonSpriteAreaProps } from '../../store';
 
 const PokemonSpriteArea = ({
@@ -10,16 +10,16 @@ const PokemonSpriteArea = ({
 }: PokemonSpriteAreaProps) => {
   return (
     <>
-      <C.SpriteAreaWrap>
-        <C.SpriteAreaTitleWrap>
-          <C.SpriteAreaPokeball></C.SpriteAreaPokeball>
-          <C.SpriteAreaTitle style={{ color: `${color}` }}>
+      <S.SpriteAreaWrap>
+        <S.SpriteAreaTitleWrap>
+          <S.SpriteAreaPokeball></S.SpriteAreaPokeball>
+          <S.SpriteAreaTitle style={{ color: `${color}` }}>
             No. {indexNumber} {name}
-          </C.SpriteAreaTitle>
-          <C.SpriteAreaPokeball></C.SpriteAreaPokeball>
-        </C.SpriteAreaTitleWrap>
+          </S.SpriteAreaTitle>
+          <S.SpriteAreaPokeball></S.SpriteAreaPokeball>
+        </S.SpriteAreaTitleWrap>
         <img src={officialSprite} alt={name} />
-      </C.SpriteAreaWrap>
+      </S.SpriteAreaWrap>
     </>
   );
 };
