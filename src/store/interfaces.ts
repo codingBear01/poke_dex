@@ -494,7 +494,7 @@ export interface PokemonPageProps {
         }
       ];
       evolution_chain: {
-        url: string | null;
+        url: string;
       };
       flavor_text_entries:
         | null
@@ -543,7 +543,7 @@ export interface PokemonPageProps {
       }
     ];
     evolution_chain: {
-      url: string | null;
+      url: string;
     };
     flavor_text_entries:
       | null

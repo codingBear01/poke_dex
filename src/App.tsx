@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { MainPage, PokemonInfoPage, PokemonMovesPage } from './Pages';
+import {
+  EvolutionaryChainPage,
+  MainPage,
+  PokemonInfoPage,
+  PokemonMovesPage,
+} from './pages';
 import { PokemonPageProps } from './store';
 
 function App() {
@@ -16,6 +21,17 @@ function App() {
         path="/pokemon-info"
         element={
           <PokemonInfoPage
+            setPokemonData={setPokemonData}
+            pokemonData={pokemonData}
+            setSpeciesData={setSpeciesData}
+            speciesData={speciesData}
+          />
+        }
+      />
+      <Route
+        path="/pokemon-evolutionary-chain"
+        element={
+          <EvolutionaryChainPage
             setPokemonData={setPokemonData}
             pokemonData={pokemonData}
             setSpeciesData={setSpeciesData}

@@ -22,6 +22,8 @@ const NavBar = () => {
             style={{
               width: '130px',
             }}
+            data-value="evolutionary-chain"
+            onClick={handleTransferPage}
           >
             Evolutionary Chain
           </S.NavBarBtn>

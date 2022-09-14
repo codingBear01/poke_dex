@@ -13,7 +13,6 @@ const PokemonInfoPage = ({
   speciesData,
 }: PokemonPageProps) => {
   const pokemonName = localStorage.getItem('pokemonName');
-
   const abilities = pokemonData?.abilities;
   const baseHappiness = speciesData?.base_happiness;
   const captureRate = speciesData?.capture_rate;
