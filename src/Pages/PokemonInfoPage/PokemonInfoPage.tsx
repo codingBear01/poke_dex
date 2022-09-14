@@ -117,7 +117,9 @@ const PokemonInfoPage = ({
                     style={{
                       color: ability.slot === 3 ? `${color}` : '',
                       textShadow:
-                        ability.slot === 3 ? `0 0 2px ${colors.black} ` : '',
+                        ability.slot === 3
+                          ? `-1px 0 ${colors.black}, 0 1px ${colors.black}, 1px 0 ${colors.black}, 0 -1px ${colors.black}`
+                          : '',
                     }}
                   >
                     {i + 1}. {ability.ability.name}
