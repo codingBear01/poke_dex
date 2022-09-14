@@ -1,7 +1,7 @@
 export const colors = {
   black: '#191919',
   grey: '#dfdfdf',
-  white: '#f0f0f0',
+  white: '#f5f5f5',
   red: '#ce2211',
   orange: '#e54222',
   yellow: '#FFCC00',

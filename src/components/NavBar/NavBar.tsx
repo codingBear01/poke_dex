@@ -18,6 +18,18 @@ const NavBar = () => {
           </S.NavBarBtn>
         </li>
         <li>
+          <S.NavBarBtn
+            style={{
+              width: '130px',
+            }}
+          >
+            Evolutionary Chain
+          </S.NavBarBtn>
+        </li>
+        <li>
+          <S.NavBarBtn data-value="stats">Stats</S.NavBarBtn>
+        </li>
+        <li>
           <S.NavBarBtn data-value="moves" onClick={handleTransferPage}>
             Moves
           </S.NavBarBtn>
@@ -27,15 +39,6 @@ const NavBar = () => {
         </li>
         <li>
           <S.NavBarBtn>Weakness</S.NavBarBtn>
-        </li>
-        <li>
-          <S.NavBarBtn
-            style={{
-              width: '200px',
-            }}
-          >
-            Evolutionary Chain
-          </S.NavBarBtn>
         </li>
       </S.NavBarUl>
     </nav>
